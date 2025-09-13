@@ -1,27 +1,22 @@
-from sympy import Matrix
+import matplotlib.pyplot as plt
 
-def orthogonal_complement(vector):
-    # Convert vector into a row matrix
-    v = Matrix([vector])  
-    
-    # Nullspace gives a basis for all x such that v * x^T = 0
-    nullspace_basis = v.nullspace()
-    
-    return nullspace_basis
+# Define vector
+v = [3, 2]
 
-def verify_orthogonality(vector, basis):
-    v = Matrix(vector)
-    for b in basis:
-        print(f"Dot product with {b.T}: {v.dot(b)}")  # should be 0
+# Plot arrow from origin
+plt.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, color='blue')
 
-# Test case 1
-v1 = [2, 3]
-basis1 = orthogonal_complement(v1)
-print("Orthogonal complement basis for v1:", basis1)
-verify_orthogonality(v1, basis1)
+# Mark the tip with red dot
+plt.plot(v[0], v[1], 'ro')
 
-# Test case 2
-v2 = [1, 2, 3]
-basis2 = orthogonal_complement(v2)
-print("\nOrthogonal complement basis for v2:", basis2)
-verify_orthogonality(v2, basis2)
+# Add grid, labels, title
+plt.grid(True)
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axvline(0, color='black', linewidth=0.5)
+plt.xlim(-1, 5)
+plt.ylim(-1, 5)
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('2D Vector Plot')
+
+plt.show()
